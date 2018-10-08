@@ -1,5 +1,5 @@
 from flask import Flask, render_template, send_from_directory, jsonify
-import urllib2
+from urllib.request import urlopen
 import xml.etree.ElementTree as ET
 import subprocess
 
@@ -19,7 +19,7 @@ def serve_static(path):
 
 @app.route('/get_news_headlines')
 def get_news_headlines():
-	xml_response = urllib2.urlopen('http://feeds.bbci.co.uk/news/rss.xml?edition=us').read()
+	xml_response = urlopen('http://feeds.bbci.co.uk/news/rss.xml?edition=us').read()
 	xml_root = ET.fromstring(xml_response)
 	results = []
 
